@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dj5036wgt3a82"]
+[gd_scene load_steps=15 format=3 uid="uid://dj5036wgt3a82"]
 
 [ext_resource type="Texture2D" uid="uid://bjs1c67unte0v" path="res://Models/Kenny Prototype Texture/Orange/texture_01.png" id="1_4fvsi"]
 [ext_resource type="Script" path="res://Scenes/rocket.gd" id="1_vbms1"]
 [ext_resource type="Texture2D" uid="uid://bumc76xsfc4my" path="res://Models/Kenny Prototype Texture/Green/texture_01.png" id="2_x7y3t"]
+[ext_resource type="Texture2D" uid="uid://bn61usrgic4ew" path="res://Models/Kenny Prototype Texture/Red/texture_03.png" id="4_twxht"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq3mk"]
 albedo_texture = ExtResource("1_4fvsi")
@@ -11,26 +12,15 @@ uv1_triplanar = true
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8gqap"]
 height = 10.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ccl50"]
-height = 10.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_obmld"]
-radius = 0.1
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f2oa5"]
-radius = 0.1
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ikly5"]
-radius = 0.1
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gju6b"]
-radius = 0.1
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2wfa"]
+size = Vector3(3, 10.714, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dpgrl"]
 albedo_texture = ExtResource("2_x7y3t")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_670c8"]
 radius = 0.1
+height = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uejy6"]
 albedo_texture = ExtResource("2_x7y3t")
@@ -41,6 +31,14 @@ albedo_texture = ExtResource("2_x7y3t")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7prrd"]
 albedo_texture = ExtResource("2_x7y3t")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5olek"]
+albedo_texture = ExtResource("4_twxht")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_e5y5i"]
+top_radius = 0.01
+bottom_radius = 0.3
+height = 1.0
+
 [node name="Rocket" type="RigidBody3D"]
 script = ExtResource("1_vbms1")
 
@@ -49,23 +47,8 @@ material_override = SubResource("StandardMaterial3D_vq3mk")
 mesh = SubResource("CapsuleMesh_8gqap")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_ccl50")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, -4.5, -0.7)
-shape = SubResource("CapsuleShape3D_obmld")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0.5, 0.866025, 0, 0.866025, -0.5, -1, -2.18557e-08, -3.78552e-08, -0.7, -4.5, 0)
-shape = SubResource("CapsuleShape3D_f2oa5")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, -4.37114e-08, -7.57103e-08, 0, 0.866025, -0.5, 8.74228e-08, -0.5, -0.866025, 0, -4.5, 0.733)
-shape = SubResource("CapsuleShape3D_ikly5")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.19249e-08, -0.5, -0.866025, 0, 0.866025, -0.5, 1, 5.96244e-09, 1.03272e-08, 0.7, -4.5, 0)
-shape = SubResource("CapsuleShape3D_gju6b")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123901, -0.423615, 0.0248413)
+shape = SubResource("BoxShape3D_h2wfa")
 
 [node name="Legs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
@@ -89,3 +72,11 @@ mesh = SubResource("CapsuleMesh_670c8")
 transform = Transform3D(1.19249e-08, -0.5, -0.866025, 0, 0.866025, -0.5, 1, 5.96244e-09, 1.03272e-08, 0.7, 0, 0)
 material_override = SubResource("StandardMaterial3D_7prrd")
 mesh = SubResource("CapsuleMesh_670c8")
+
+[node name="ThrustPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.90153, 0)
+
+[node name="Thruster" type="MeshInstance3D" parent="ThrustPoint"]
+material_override = SubResource("StandardMaterial3D_5olek")
+mesh = SubResource("CylinderMesh_e5y5i")
+skeleton = NodePath("../..")
