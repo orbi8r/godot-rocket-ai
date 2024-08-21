@@ -17,5 +17,3 @@ func _ready():
 func _process(delta):
 	velocity.text = "Velocity : " + str(rocket.linear_velocity)
 	coords.text = "Coordinate : " + str(rocket.global_position)
-	
-	generation.text = str(rocket.thrust_dir) + str(rocket.is_trusting)

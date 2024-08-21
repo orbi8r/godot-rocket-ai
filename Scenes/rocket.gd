@@ -2,6 +2,8 @@ extends RigidBody3D
 
 @onready var thrust_point = $ThrustPoint
 @onready var thruster = $ThrustPoint/Thruster
+@onready var fire = $ThrustPoint/Thruster/Fire
+
 
 var is_trusting = false
 var thrust_dir = Vector3(0,15,0)
@@ -9,7 +11,7 @@ var thrust_xz_dir = Vector3(1,0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	fire.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,8 +36,10 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("thrust"):
 		is_trusting = true
+		fire.visible = true
 	elif Input.is_action_just_released("thrust"):
 		is_trusting = false
+		fire.visible = false
 	
 	if is_trusting == true:
 		apply_force(thrust_dir, Vector3(0,-5,0))

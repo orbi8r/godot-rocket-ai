@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dj5036wgt3a82"]
+[gd_scene load_steps=18 format=3 uid="uid://dj5036wgt3a82"]
 
 [ext_resource type="Texture2D" uid="uid://bjs1c67unte0v" path="res://Models/Kenny Prototype Texture/Orange/texture_01.png" id="1_4fvsi"]
 [ext_resource type="Script" path="res://Scenes/rocket.gd" id="1_vbms1"]
 [ext_resource type="Texture2D" uid="uid://bumc76xsfc4my" path="res://Models/Kenny Prototype Texture/Green/texture_01.png" id="2_x7y3t"]
+[ext_resource type="Texture2D" uid="uid://bmlidfwl0258n" path="res://Models/Kenny Prototype Texture/Dark/texture_08.png" id="4_8cmbk"]
 [ext_resource type="Texture2D" uid="uid://bn61usrgic4ew" path="res://Models/Kenny Prototype Texture/Red/texture_03.png" id="4_twxht"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq3mk"]
@@ -31,13 +32,21 @@ albedo_texture = ExtResource("2_x7y3t")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7prrd"]
 albedo_texture = ExtResource("2_x7y3t")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5olek"]
-albedo_texture = ExtResource("4_twxht")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w08sa"]
+albedo_texture = ExtResource("4_8cmbk")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_e5y5i"]
 top_radius = 0.01
 bottom_radius = 0.3
 height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7l2lm"]
+albedo_texture = ExtResource("4_twxht")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ar5rq"]
+top_radius = 0.001
+bottom_radius = 0.2
+height = 0.5
 
 [node name="Rocket" type="RigidBody3D"]
 script = ExtResource("1_vbms1")
@@ -77,6 +86,11 @@ mesh = SubResource("CapsuleMesh_670c8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.90153, 0)
 
 [node name="Thruster" type="MeshInstance3D" parent="ThrustPoint"]
-material_override = SubResource("StandardMaterial3D_5olek")
+material_override = SubResource("StandardMaterial3D_w08sa")
 mesh = SubResource("CylinderMesh_e5y5i")
 skeleton = NodePath("../..")
+
+[node name="Fire" type="MeshInstance3D" parent="ThrustPoint/Thruster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_7l2lm")
+mesh = SubResource("CylinderMesh_ar5rq")
