@@ -3,14 +3,10 @@ extends RigidBody3D
 @onready var thrust_point = $ThrustPoint
 @onready var thruster = $ThrustPoint/Thruster
 @onready var fire = $ThrustPoint/Thruster/Fire
-@onready var ai_controller_3d = $"../AIController3D"
-
-
-@export var thrustforce = 15
 
 
 var is_trusting = false
-var thrust_dir = Vector3(0,thrustforce,0)
+var thrust_dir = Vector3(0,15,0)
 var thrust_xz_dir = Vector3(1,0,0)
 
 # Called when the node enters the scene tree for the first time.
@@ -19,7 +15,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(delta):
 	
 	if Input.is_action_pressed("clockwise"):
 		thrust_point.rotate_y(deg_to_rad(-10))

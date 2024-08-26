@@ -22,4 +22,3 @@ func _ready():
 func _process(delta):
 	velocity.text = "Velocity : " + str(rocket.linear_velocity)
 	coords.text = "Coordinate : " + str(rocket.global_position)
-
