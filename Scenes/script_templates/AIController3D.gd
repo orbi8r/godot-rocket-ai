@@ -2,12 +2,11 @@ extends AIController3D
 
 @onready var rocket = $"../Rocket"
 
-var thrustrotation
-var thrustortho
-var thrust
+var thrustrotation = 0
+var thrustortho = 0 
+var thrust = 0
 
 func get_obs() -> Dictionary:
-	assert(false, "the get_obs method is not implemented when extending from ai_controller") 
 	return {"obs":[]}
 
 func get_reward() -> float:	

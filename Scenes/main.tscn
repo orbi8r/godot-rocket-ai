@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6lw40aasa7v6"]
+[gd_scene load_steps=21 format=3 uid="uid://b6lw40aasa7v6"]
 
 [ext_resource type="PackedScene" uid="uid://d25mseeafrx3g" path="res://Scenes/rocket.tscn" id="1_r4a1g"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_vv5yd"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="4_hifae"]
 [ext_resource type="Texture2D" uid="uid://bt7qwc1jv8a7" path="res://Models/sky_water_landscape.jpg" id="5_cdpxq"]
 [ext_resource type="Script" path="res://Scenes/script_templates/AIController3D.gd" id="8_smjgl"]
+[ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="9_mhw1y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lvif"]
 albedo_texture = ExtResource("2_c0ari")
@@ -188,3 +189,6 @@ text = "Velocity : 100"
 
 [node name="AIController3D" type="Node3D" parent="CanvasLayer"]
 script = ExtResource("8_smjgl")
+
+[node name="Sync" type="Node" parent="."]
+script = ExtResource("9_mhw1y")
