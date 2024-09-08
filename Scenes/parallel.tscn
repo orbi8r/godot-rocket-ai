@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmdjqxmbnu5ds"]
+
+[ext_resource type="PackedScene" uid="uid://b6lw40aasa7v6" path="res://Scenes/main.tscn" id="1_c0vkj"]
+[ext_resource type="PackedScene" uid="uid://3ojlefc6fljw" path="res://Scenes/main2.tscn" id="2_l2867"]
+[ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="3_rps7y"]
+
+[node name="Parallel" type="Node3D"]
+
+[node name="Main" parent="." instance=ExtResource("1_c0vkj")]
+
+[node name="Main2" parent="." instance=ExtResource("2_l2867")]
+
+[node name="Main3" parent="." instance=ExtResource("2_l2867")]
+
+[node name="Main4" parent="." instance=ExtResource("2_l2867")]
+
+[node name="Sync" type="Node" parent="."]
+script = ExtResource("3_rps7y")
+speed_up = 10.0

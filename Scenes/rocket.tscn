@@ -1,10 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://d25mseeafrx3g"]
+[gd_scene load_steps=19 format=3 uid="uid://d25mseeafrx3g"]
 
 [ext_resource type="Texture2D" uid="uid://bjs1c67unte0v" path="res://Models/Kenny Prototype Texture/Orange/texture_01.png" id="1_4fvsi"]
 [ext_resource type="Script" path="res://Scenes/rocket.gd" id="1_vbms1"]
 [ext_resource type="Texture2D" uid="uid://bumc76xsfc4my" path="res://Models/Kenny Prototype Texture/Green/texture_01.png" id="2_x7y3t"]
 [ext_resource type="Texture2D" uid="uid://bmlidfwl0258n" path="res://Models/Kenny Prototype Texture/Dark/texture_08.png" id="4_8cmbk"]
 [ext_resource type="Texture2D" uid="uid://bn61usrgic4ew" path="res://Models/Kenny Prototype Texture/Red/texture_03.png" id="4_twxht"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n3aai"]
+rough = true
+absorbent = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq3mk"]
 albedo_texture = ExtResource("1_4fvsi")
@@ -13,23 +17,23 @@ uv1_triplanar = true
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8gqap"]
 height = 10.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_h2wfa"]
-size = Vector3(3, 10.714, 3)
+[sub_resource type="BoxShape3D" id="BoxShape3D_4vo1n"]
+size = Vector3(3, 6.35999, 3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dpgrl"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uejy6"]
 albedo_texture = ExtResource("2_x7y3t")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_670c8"]
 radius = 0.1
 height = 3.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uejy6"]
-albedo_texture = ExtResource("2_x7y3t")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ox70e"]
 albedo_texture = ExtResource("2_x7y3t")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7prrd"]
+albedo_texture = ExtResource("2_x7y3t")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dpgrl"]
 albedo_texture = ExtResource("2_x7y3t")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w08sa"]
@@ -49,6 +53,7 @@ bottom_radius = 0.2
 height = 0.5
 
 [node name="Rocket" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_n3aai")
 script = ExtResource("1_vbms1")
 
 [node name="Body" type="MeshInstance3D" parent="."]
@@ -56,16 +61,11 @@ material_override = SubResource("StandardMaterial3D_vq3mk")
 mesh = SubResource("CapsuleMesh_8gqap")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123901, -0.423615, 0.0248413)
-shape = SubResource("BoxShape3D_h2wfa")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.46843, 0)
+shape = SubResource("BoxShape3D_4vo1n")
 
 [node name="Legs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Legs"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, -0.7)
-material_override = SubResource("StandardMaterial3D_dpgrl")
-mesh = SubResource("CapsuleMesh_670c8")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Legs"]
 transform = Transform3D(-4.37114e-08, 0.5, 0.866025, 0, 0.866025, -0.5, -1, -2.18557e-08, -3.78552e-08, -0.7, 0, 0)
@@ -80,6 +80,11 @@ mesh = SubResource("CapsuleMesh_670c8")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Legs"]
 transform = Transform3D(1.19249e-08, -0.5, -0.866025, 0, 0.866025, -0.5, 1, 5.96244e-09, 1.03272e-08, 0.7, 0, 0)
 material_override = SubResource("StandardMaterial3D_7prrd")
+mesh = SubResource("CapsuleMesh_670c8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Legs"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, -0.7)
+material_override = SubResource("StandardMaterial3D_dpgrl")
 mesh = SubResource("CapsuleMesh_670c8")
 
 [node name="ThrustPoint" type="Marker3D" parent="."]

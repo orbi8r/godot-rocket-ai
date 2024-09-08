@@ -1,16 +1,9 @@
 extends Node3D
 
-@onready var generation = $CanvasLayer/Text/Generation
-@onready var coords = $CanvasLayer/Text/Coords
-@onready var velocity = $CanvasLayer/Text/Velocity
-@onready var rotationn = $CanvasLayer/Text/Rotation
-
 @onready var rocket = $CanvasLayer/Rocket
 @onready var ai_controller_3d = $CanvasLayer/AIController3D
 
-
 @export var rocketheight = 200
-var gen = 0
 var groundtime = 0
 
 var prevrotation = 0
@@ -24,9 +17,7 @@ func reset():
 	rocket.rotation.x = 0
 	rocket.rotation.y = randf_range(-1,1)
 	rocket.rotation.z = randf_range(-1,1)
-	gen+=4
 	groundtime = 0
-	generation.text = "Gen : " + str(gen)
 	
 
 # Called when the node enters the scene tree for the first time.
@@ -36,9 +27,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	velocity.text = "Velocity : " + str(round(rocket.linear_velocity))
-	coords.text = "Coordinate : " + str(round(rocket.global_position))
-	rotationn.text = "Rotation : " + str(round(rocket.rotation_degrees))
 	
 	if groundtime > 100:
 		reset()
@@ -57,7 +45,7 @@ func _process(delta):
 		ai_controller_3d.reward -= delta*((rocket.rotation.x)**2 + (rocket.rotation.z)**2)*100
 	else:
 		ai_controller_3d.reward += delta*(20-((rocket.rotation.x)**2 + (rocket.rotation.z)**2))
-		
+
 	prevrotation = ((rocket.rotation.x)**2 + (rocket.rotation.z)**2)
 	
 	if rocket.is_thrusting == true:
@@ -69,4 +57,3 @@ func _process(delta):
 		if rocket.global_position.y < -15:
 			ai_controller_3d.reward += delta*10
 			groundtime += delta
-			

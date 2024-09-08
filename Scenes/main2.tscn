@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://3ojlefc6fljw"]
+
+[ext_resource type="Script" path="res://Scenes/main2.gd" id="1_bkpga"]
+[ext_resource type="PackedScene" uid="uid://d25mseeafrx3g" path="res://Scenes/rocket.tscn" id="2_sjaxh"]
+[ext_resource type="Script" path="res://Scenes/script_templates/AIController3D.gd" id="8_s4u2o"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_bkpga")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Rocket" parent="CanvasLayer" instance=ExtResource("2_sjaxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 300, 0)
+
+[node name="AIController3D" type="Node3D" parent="CanvasLayer"]
+script = ExtResource("8_s4u2o")

@@ -5,9 +5,10 @@ extends RigidBody3D
 @onready var fire = $ThrustPoint/Thruster/Fire
 @onready var ai_controller_3d = $"../AIController3D"
 
+var thrustdir = Vector3.ZERO
 
 
-var is_trusting = false
+var is_thrusting = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,14 +44,16 @@ func _process(_delta):
 		
 	# Thrust firing for Human and AI controls	
 	
-	if Input.is_action_just_pressed("thrust") || ai_controller_3d.thrust > 0:
-		is_trusting = true
+	if Input.is_action_just_pressed("thrust") || ai_controller_3d.thrust == 1:
+		is_thrusting = true
 		fire.visible = true
-	elif Input.is_action_just_released("thrust") || ai_controller_3d.thrust < 0:
-		is_trusting = false
+	elif Input.is_action_just_released("thrust") || ai_controller_3d.thrust == 0 :
+		is_thrusting = false
 		fire.visible = false
 	
-	if is_trusting == true:
-		apply_force(30*(thruster.global_position - fire.global_position), fire.global_position - global_position)
+	
+	thrustdir = 30*(thruster.global_position - fire.global_position)
+	if is_thrusting == true:
+		apply_force(thrustdir, fire.global_position - global_position)
 		
 	
